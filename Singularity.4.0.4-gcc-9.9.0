@@ -1,0 +1,23 @@
+BootStrap: library
+From: ubuntu:20.04
+
+%post
+    apt-get install -y software-properties-common
+    add-apt-repository universe
+    apt-get update -y
+    apt-get install -y build-essential g++ gfortran wget ssh
+    apt-get clean
+
+    wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-4.0.4.tar.gz
+    tar zxf openmpi-4.0.4.tar.gz
+    cd openmpi-4.0.4
+    ./configure
+    make
+    make install
+    ldconfig
+
+%environment
+    export LC_ALL=C
+
+%labels
+    Author radovan.bast@uit.no
